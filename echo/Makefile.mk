@@ -1,14 +1,16 @@
-CC=g++
-CFLAGS=-c -Wall
-LDFLAGS=
-SOURCES=main_TCP.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=hello
+.PHONY: all debug release clean
 
-all: $(SOURCES) $(EXECUTABLE)
-	
-$(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+all: debug release
 
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+debug: main_TCP-dbg
+
+hello-dbg: main_TCP.cpp
+	g++ -g -O0 main_TCP.cpp -o main_TCP-dbg -Wall
+
+release: main_TCP
+
+hello: main_TCP.cpp
+	g++ -O2 main_TCP.cpp -o main_TCP -DNDEBUG -Wall
+
+clean:
+	rm -f main_TCP-dbg main_TCP
