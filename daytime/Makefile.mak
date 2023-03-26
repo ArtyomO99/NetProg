@@ -8,9 +8,9 @@ debug: main_UDP-dbg
 hello-dbg: main_UDP.cpp
 	g++ -g -O0 main_UDP.cpp -o main_UDP-dbg -Wall
 
-release: hello
+release: main_UDP
 
-hello: hello.cpp
+hello: main_UDP.cpp
 	g++ -O2 main_UDP.cpp -o main_UDP -DNDEBUG -Wall
 
 clean:
